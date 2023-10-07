@@ -91,9 +91,6 @@ const EventsPage = () => {
                     loadingEvents ? "none" : "animated loading hide-text"
                   }`}
                 >
-                  <p>
-                    {event.description}
-                  </p>
                 </div>
               </div>
 
@@ -101,6 +98,10 @@ const EventsPage = () => {
                 <div className="u-text-center">
                   <span>
                   {event.description}
+                  </span>
+                  <br />
+                  <span>
+                  {`Date: ${event.eventDate}`}
                   </span>
                 </div>
               </div>

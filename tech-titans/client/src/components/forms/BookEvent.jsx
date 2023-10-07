@@ -52,7 +52,7 @@ const BookEventForm = () => {
             >
               <Formik
                 initialValues={{
-                  fullName: "",
+                    fullname: "",
                   eventName: "",
                   contactNumber: "",
                 }}
@@ -96,12 +96,12 @@ const BookEventForm = () => {
                           padding: "1rem",
                         }}
                       >
-                        <label htmlFor="fullName">Fullname</label>
+                        <label htmlFor="fullname">Fullname</label>
                         <Field
-                          id="fullName"
-                          name="fullName"
+                          id="fullname"
+                          name="fullname"
                           placeholder="Hackathon Week of Code"
-                          value={values.fullName}
+                          value={values.fullname}
                           required
                         />
                         <label htmlFor="contactNumber">Contact Number</label>

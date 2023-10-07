@@ -11,7 +11,6 @@ import { Logout } from "./components/misc/Logout";
 import About from "./components/misc/About";
 import { UserContext } from "./context/User.context";
 import LoadingPage from "./helpers/components/loadingPage";
-import PrimaryHomepage from "./components/misc/PrimaryHomepage";
 import EventsPage from "./components/misc/EventsPage";
 import BookEventForm from "./components/forms/BookEvent";
 
