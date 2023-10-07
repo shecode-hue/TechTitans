@@ -23,7 +23,9 @@
   padding: 20px;
   text-align: center;
 }
-
+.slide-content h2{
+color:rgb(254,201,14);
+}
 
 
 .button-container {
@@ -36,7 +38,7 @@
   
   .pulse-button {
     background-color: grey; /* Initial background color */
-    color: white; /* Text color */
+    color: rgb(254,201,14); 
     border: none;
     padding: 10px 20px;
     font-size: 16px;
@@ -55,20 +57,19 @@
       transform: scale(1);
     }
     50% {
-      transform: scale(2); /* Increase size during the animation */
+      transform: scale(1.05); /* Increase size during the animation */
     }
     100% {
       transform: scale(1);
     }
   }
 
-  .main-calender-container{
+  /* .main-calender-container{
     background-color:rgb(254,201,14)
-  }
+  } */
   .calendar-container{
     
-    width: 40%;
-    height:500px;
+    width: 90%;
     display:flex;
     align-items:center;
     justify-content:center;
