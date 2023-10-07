@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import SignInForm from "./components/forms/SignInForm";
-import CreateEvent from "./components/forms/CreatEvent";
+import CreateEvent from "./components/forms/CreateEvent";
 import SignUpForm from "./components/forms/SignUpForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./components/misc/Homepage";
@@ -12,6 +12,7 @@ import About from "./components/misc/About";
 import { UserContext } from "./context/User.context";
 import LoadingPage from "./helpers/components/loadingPage";
 import PrimaryHomepage from "./components/misc/PrimaryHomepage";
+import EventsPage from "./components/misc/EventsPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -42,12 +43,12 @@ function App() {
               <Route exact path="/login" element={<SignInForm />}></Route>
               <Route exact path="/about" element={<About />}></Route>
               <Route exact path="/register" element={<SignUpForm />}></Route>
-              <Route exact path="/hi" element={<PrimaryHomepage />}></Route>
               <Route
                 exact
                 path="/create-event"
                 element={<CreateEvent />}
               ></Route>
+              <Route exact path="/events" element={<EventsPage />}></Route>
               <Route exact path="/logout" element={<Logout />}></Route>
             </Routes>
             <Footer />
