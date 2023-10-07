@@ -1,12 +1,15 @@
 import { Formik } from "formik";
 import axios from "axios";
+import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { openNotification } from "../../helpers/components/toastNotification";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
+const { Option } = Select;
 
 const SignUpForm = () => {
   let navigate = useNavigate();
+  const selectOptions = ["Participant", "Organiser"];
 
   // successful submission function
   const handleSuccess = () => {
@@ -40,20 +43,22 @@ const SignUpForm = () => {
               name: "",
               password: "",
               contactNumber: "",
-              username: ""
+              username: "",
+              userType: "",
             }}
             validate={(values) => {}}
             onSubmit={(values, { setSubmitting }) => {
               axios
                 .post(`${ NODE_ENV === "production"
                 ? REACT_APP_API_URL_PROD
-                : REACT_APP_API_URL_DEV}/signUp`, values)
+                : REACT_APP_API_URL_DEV}/api/user`, values)
                 .then(function (response) {
                   setSubmitting(false);
                   values.name = "";
                   values.password = "";
                   values.contactNumber = "";
                   values.username = "";
+                  values.userType = "";
                   handleSuccess();
                 })
                 .catch(function (error) {
@@ -114,6 +119,19 @@ const SignUpForm = () => {
                   required
                   error={errors.password && touched.password}
                 />
+                 <label htmlFor="active">Select User Type</label>
+                      <Select
+                        name="categories"
+                        style={{ width: "100%" }}
+                        onChange={(value) => (values.userType = value)}
+                        required
+                      >
+                        {selectOptions.map((option) => (
+                          <Option value={option.toUpperCase()}>
+                            {option.toUpperCase()}
+                          </Option>
+                        ))}
+                      </Select>
                 <div className="space space--lg ..."></div>
                 <button
                   className="btn-dark"

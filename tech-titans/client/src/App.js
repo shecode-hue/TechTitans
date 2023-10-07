@@ -2,18 +2,13 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
-import FireTableAntd from "./components/tables/FireTable.antd";
-import ReportsTable from "./components/tables/ReportsTable.antd";
 import SignInForm from "./components/forms/SignInForm";
 import CreateEvent from "./components/forms/CreatEvent";
 import SignUpForm from "./components/forms/SignUpForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./components/misc/Homepage";
 import { Logout } from "./components/misc/Logout";
-import PrimaryHomepage from "./components/misc/PrimaryHomepage";
 import About from "./components/misc/About";
-import EditFireForm from "./components/forms/EditFireForm";
-import ReportFire from "./components/forms/ReportFireForm";
 import { UserContext } from "./context/User.context";
 import LoadingPage from "./helpers/components/loadingPage";
 
@@ -30,12 +25,10 @@ function App() {
     setLoading(false);
 
     return () => {
-      // localStorage.removeItem("user");
     };
   }, []);
 
   function renderApp() {
-    // log the loggedIn state
     return (
       <div>
         <Router>
@@ -48,19 +41,12 @@ function App() {
               <Route exact path="/login" element={<SignInForm />}></Route>
               <Route exact path="/about" element={<About />}></Route>
               <Route exact path="/register" element={<SignUpForm />}></Route>
-              <Route exact path="/reportFire" element={<ReportFire />}></Route>
-              <Route exact path="/editFire" element={<EditFireForm />}></Route>
+              <Route
+                exact
+                path="/create-event"
+                element={<CreateEvent />}
+              ></Route>
               <Route exact path="/logout" element={<Logout />}></Route>
-              <Route
-                exact
-                path="/fireTable"
-                element={<FireTableAntd />}
-              ></Route>
-              <Route
-                exact
-                path="/reportTable"
-                element={<ReportsTable />}
-              ></Route>
             </Routes>
             <Footer />
           </UserContext.Provider>
