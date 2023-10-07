@@ -27,7 +27,7 @@ const Header = () => {
       <div className="header-nav" id="header-menu">
         <div className="nav-right">
           <div className="nav-item">
-            <Link to="/events">
+            <Link to="/book-event">
               <button className="btn-danger animated pound">Book Latest Events</button>
             </Link>
           </div>

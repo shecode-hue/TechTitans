@@ -13,6 +13,7 @@ import { UserContext } from "./context/User.context";
 import LoadingPage from "./helpers/components/loadingPage";
 import PrimaryHomepage from "./components/misc/PrimaryHomepage";
 import EventsPage from "./components/misc/EventsPage";
+import BookEventForm from "./components/forms/BookEvent";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -49,6 +50,7 @@ function App() {
                 element={<CreateEvent />}
               ></Route>
               <Route exact path="/events" element={<EventsPage />}></Route>
+              <Route exact path="/book-event" element={<BookEventForm />}></Route>
               <Route exact path="/logout" element={<Logout />}></Route>
             </Routes>
             <Footer />
