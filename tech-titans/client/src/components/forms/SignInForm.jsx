@@ -24,7 +24,7 @@ const SignInForm = () => {
       <div
         className="frame bg-white"
         style={{
-          width: "80%",
+          width: "60%",
         }}
       >
         <div className="formHeader">
@@ -44,9 +44,14 @@ const SignInForm = () => {
             onSubmit={(values, { setSubmitting }) => {
               setSubmitting(true);
               axios
-                .post(`${ NODE_ENV === "production"
-                ? REACT_APP_API_URL_PROD
-                : REACT_APP_API_URL_DEV}/login`, values)
+                .post(
+                  `${
+                    NODE_ENV === "production"
+                      ? REACT_APP_API_URL_PROD
+                      : REACT_APP_API_URL_DEV
+                  }/api/login`,
+                  values
+                )
                 .then(function (user) {
                   const { data } = user;
                   setUser(data);
@@ -79,7 +84,7 @@ const SignInForm = () => {
               isSubmitting,
               /* and other goodies */
             }) => (
-              <form onSubmit={handleSubmit} >
+              <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username</label>
                 <input
                   type="text"

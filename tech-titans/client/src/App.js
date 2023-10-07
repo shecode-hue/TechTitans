@@ -5,13 +5,13 @@ import Footer from "./components/navigation/Footer";
 import FireTableAntd from "./components/tables/FireTable.antd";
 import ReportsTable from "./components/tables/ReportsTable.antd";
 import SignInForm from "./components/forms/SignInForm";
+import CreateEvent from "./components/forms/CreatEvent";
 import SignUpForm from "./components/forms/SignUpForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./components/misc/Homepage";
 import { Logout } from "./components/misc/Logout";
 import PrimaryHomepage from "./components/misc/PrimaryHomepage";
 import About from "./components/misc/About";
-import FireForm from "./components/forms/FireForm";
 import EditFireForm from "./components/forms/EditFireForm";
 import ReportFire from "./components/forms/ReportFireForm";
 import { UserContext } from "./context/User.context";
@@ -46,6 +46,11 @@ function App() {
             <Routes>
               <Route exact path="/" element={<PrimaryHomepage />}></Route>
               <Route exact path="/home" element={<Homepage />}></Route>
+              <Route
+                exact
+                path="/create-event"
+                element={<CreateEvent />}
+              ></Route>
               <Route exact path="/login" element={<SignInForm />}></Route>
               <Route exact path="/about" element={<About />}></Route>
               <Route exact path="/register" element={<SignUpForm />}></Route>
@@ -62,7 +67,6 @@ function App() {
                 path="/reportTable"
                 element={<ReportsTable />}
               ></Route>
-              <Route exact path="/fireForm" element={<FireForm />}></Route>
             </Routes>
             <Footer />
           </UserContext.Provider>
