@@ -27,25 +27,20 @@ const Header = () => {
       <div className="header-nav" id="header-menu">
         <div className="nav-right">
           <div className="nav-item">
-            <Link to="/reportFire">
+            <Link to="/events">
               <button className="btn-danger animated pound">Book Latest Events</button>
             </Link>
           </div>
           {user ? (
             <Fragment>
               <div className={`nav-item text-dark`}>
-                <Link to="/fireForm" className={` text-black`}>
+                <Link to="/events" className={` text-black`}>
                   Browse for events
                 </Link>
               </div>
               <div className={`nav-item`}>
-                <Link to="/fireTable" className={` text-black`}>
+                <Link to="/create-event" className={` text-black`}>
                   Add an Event
-                </Link>
-              </div>
-              <div className={`nav-item`}>
-                <Link to="/reportTable" className={` text-black`}>
-                  Reports Table
                 </Link>
               </div>
             </Fragment>
@@ -53,12 +48,12 @@ const Header = () => {
             ""
           )}
           <div className="nav-item">
-            <Link to="/about" className={` text-black`}>
+            <Link to="/events" className={` text-black`}>
               Browse an Event
             </Link>
           </div>
           <div className="nav-item">
-            <Link to="/about" className={` text-black`}>
+            <Link to="/create-event" className={` text-black`}>
               Add an Event
             </Link>
           </div>

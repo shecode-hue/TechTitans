@@ -43,7 +43,7 @@ const CreateEventForm = () => {
             }}
           >
             <div className="formHeader">
-              <h3>Creat Event</h3>
+              <h3>Create Event</h3>
             </div>
             <div
               style={{
@@ -106,7 +106,6 @@ const CreateEventForm = () => {
                         padding: "1rem"
                       }}
                     >
-                      <h2 className="text-center">Create an Event</h2>
                       <label htmlFor="title">Name of Event</label>
                       <Field
                         id="title"
@@ -155,6 +154,14 @@ const CreateEventForm = () => {
                         name="contactNumber"
                         placeholder="08123456789"
                         value={values.contactNumber}
+                        required
+                      />
+                      <label htmlFor="description">Description</label>
+                      <Field
+                        id="description"
+                        name="description"
+                        placeholder="08123456789"
+                        value={values.description}
                         required
                       />
                       <label htmlFor="active">Event Category?</label>
