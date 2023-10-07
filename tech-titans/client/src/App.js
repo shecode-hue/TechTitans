@@ -11,6 +11,7 @@ import { Logout } from "./components/misc/Logout";
 import About from "./components/misc/About";
 import { UserContext } from "./context/User.context";
 import LoadingPage from "./helpers/components/loadingPage";
+import PrimaryHomepage from "./components/misc/PrimaryHomepage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -41,6 +42,7 @@ function App() {
               <Route exact path="/login" element={<SignInForm />}></Route>
               <Route exact path="/about" element={<About />}></Route>
               <Route exact path="/register" element={<SignUpForm />}></Route>
+              <Route exact path="/hi" element={<PrimaryHomepage />}></Route>
               <Route
                 exact
                 path="/create-event"
