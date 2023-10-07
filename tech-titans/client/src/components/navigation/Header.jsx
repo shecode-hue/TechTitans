@@ -1,4 +1,4 @@
-import logo from "../../assets/fireDepartmentLogo.png";
+import logo from "../../assets/logo_ncrst.jpeg";
 import { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/User.context";
@@ -15,7 +15,7 @@ const Header = () => {
               alt="fire department logo"
               style={{ height: "4rem" }}
             />
-            <p className="mx-2">Fire Monitoring and Recording Namibia</p>
+            <p className="mx-2">Science Connect</p>
           </Link>
         </div>
         <div className="nav-item nav-btn" id="header-btn">
@@ -28,19 +28,19 @@ const Header = () => {
         <div className="nav-right">
           <div className="nav-item">
             <Link to="/reportFire">
-              <button className="btn-danger animated pound">Report</button>
+              <button className="btn-danger animated pound">Book Latest Events</button>
             </Link>
           </div>
           {user ? (
             <Fragment>
               <div className={`nav-item text-dark`}>
                 <Link to="/fireForm" className={` text-black`}>
-                  Fire Report Form
+                  Browse for events
                 </Link>
               </div>
               <div className={`nav-item`}>
                 <Link to="/fireTable" className={` text-black`}>
-                  Fires Table
+                  Add an Event
                 </Link>
               </div>
               <div className={`nav-item`}>
@@ -54,9 +54,15 @@ const Header = () => {
           )}
           <div className="nav-item">
             <Link to="/about" className={` text-black`}>
-              About
+              Browse an Event
             </Link>
           </div>
+          <div className="nav-item">
+            <Link to="/about" className={` text-black`}>
+              Add an Event
+            </Link>
+          </div>
+          
           <div className="nav-item has-sub toggle-hover" id="dropdown">
             {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a className="nav-dropdown-link">

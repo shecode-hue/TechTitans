@@ -1,0 +1,41 @@
+
+.slider-container {
+    /* border: 3px dotted red; */
+    position: relative;
+  }
+  
+  .slide-itemone {
+    width:300px;
+    /* border: 3px dotted red; */
+    position: relative;
+  }
+  .slide-itemtwo {
+    width:100%;
+    /* border: 3px dotted red; */
+    position: relative;
+  }
+  .slide-itemthree {
+    width:100%;
+    /* border: 3px dotted red; */
+    position: relative;
+  }
+  
+  .slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  

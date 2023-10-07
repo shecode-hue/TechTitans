@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/fireDepartmentLogo.png";
+import logo from "../../assets/logo_ncrst.jpeg";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -16,24 +16,9 @@ const Footer = () => {
         <div className="content">
           <div className="divider"></div>
 
-          <div className="row">
-            <div className="col-12">
-              <ul className="no-bullets">
-                <Link to="/">
-                  <li className="footer__list-item">Home</li>
-                </Link>
-                <Link to="/register">
-                  <li className="footer__list-item">Sign Up</li>
-                </Link>
-                <Link to="/about">
-                  <li className="footer__list-item">About Us</li>
-                </Link>
-                <ul></ul>
-              </ul>
-            </div>
-          </div>
+          
         </div>
-        <p className="subtitle">Denilson Uariua © 2022.</p>
+        <p className="subtitle">@Tech Titans 2023</p>
       </footer>
     </div>
   );
