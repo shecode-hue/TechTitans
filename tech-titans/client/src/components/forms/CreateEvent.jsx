@@ -17,7 +17,7 @@ const CreateEventForm = () => {
   function notifyFailure() {
     openNotification("Error", "Please fill in all fields");
   }
-  const selectOptions = ["Participant", "Organiser"];
+  const selectOptions = ["Hackathon", "Workshop", "Conference"];
   function renderForm() {
     return (
       <Fragment>
