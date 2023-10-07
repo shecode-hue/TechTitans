@@ -15,7 +15,7 @@ const Header = () => {
               alt="fire department logo"
               style={{ height: "4rem" }}
             />
-            <p className="mx-2">SCIENCE CONNECT</p>
+            <p className="mx-2 my-2">SCI_CONNECT</p>
           </Link>
         </div>
         <div className="nav-item nav-btn" id="header-btn">
