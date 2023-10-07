@@ -44,13 +44,7 @@ function App() {
             <div className="space space--xl ..."></div>
             <div className="space space--lg ..."></div>
             <Routes>
-              <Route exact path="/" element={<PrimaryHomepage />}></Route>
-              <Route exact path="/home" element={<Homepage />}></Route>
-              <Route
-                exact
-                path="/create-event"
-                element={<CreateEvent />}
-              ></Route>
+              <Route exact path="/" element={<Homepage />}></Route>
               <Route exact path="/login" element={<SignInForm />}></Route>
               <Route exact path="/about" element={<About />}></Route>
               <Route exact path="/register" element={<SignUpForm />}></Route>
