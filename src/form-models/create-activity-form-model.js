@@ -1,0 +1,22 @@
+export const activityFormModel = {
+  nameOfActivity: "",
+  descriptionOfActivity: "",
+  dateOfActivity: "",
+  categoryOfActivity: "",
+  locationOfActivity: "",
+  timeOfActivity: "",
+  personOfferingActivity: {
+    name: "",
+    email: "",
+    institution: "",
+    contactNumber: "",
+    designation: "",
+  },
+  targetAudience: [],
+  numberOfParticipants: 0,
+  hostInstitution: "",
+  resourcesRequired: "",
+  budget: 0,
+  fundingSource: "",
+  eventImage: "",
+};
