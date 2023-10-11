@@ -18,5 +18,6 @@ export const createActivityFormModel = {
   resourcesRequired: "",
   budget: 0,
   fundingSource: "",
+  venueOfActivity: "",
   eventImage: "",
 };

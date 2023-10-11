@@ -2,10 +2,19 @@ import { Formik, Field, Form } from "formik";
 import axios from "axios";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import { EP_INPUT, EP_SELECT, EP_TEXTAREA_INPUT } from "../components";
+import {
+  EP_INPUT,
+  EP_SELECT,
+  EP_TEXTAREA_INPUT,
+  EP_DATE_PICKER,
+  EP_TIME_PICKER,
+  EP_MULTIPLE_SELECT,
+  EP_MONEY_INPUT,
+  EP_PHONE_NUMBER_INPUT,
+} from "../components";
 import { createActivityFormModel } from "../form-models";
 import { routesDictionary } from "../configs/routes-dictionary";
-import { activityCategories } from "../configs";
+import { activityCategories, targetAudience } from "../configs";
 import { openNotification } from "../helpers/components/toast-notification";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
@@ -88,6 +97,7 @@ export const CreateActivityForm = () => {
                   errors,
                   isSubmitting,
                 }) => {
+                  console.log("values", values);
                   return (
                     <Form>
                       <div
@@ -107,49 +117,88 @@ export const CreateActivityForm = () => {
                           handleBlur={handleBlur}
                           errors={errors}
                         />
+                        <EP_DATE_PICKER
+                          values={values}
+                          name="dateOfActivity"
+                          label={"Date of Activity"}
+                        />
+                        <EP_TIME_PICKER
+                          values={values}
+                          name="timeOfActivity"
+                          label={"Time of Activity"}
+                        />
+
                         <EP_INPUT
-                          name={"title"}
-                          value={values.title}
-                          label={"Name of Activity"}
-                          placeholder={"Hackathon Week of Code"}
+                          name={"locationOfActivity"}
+                          value={values.locationOfActivity}
+                          label={"Location of Activity"}
+                          placeholder={"Windhoek, Namibia"}
                           handleChange={handleChange}
                           handleBlur={handleBlur}
                           errors={errors}
                         />
-                        <label htmlFor="activityDate">Date of Activity</label>
-                        <Field
-                          id="activityDate"
-                          name="activityDate"
-                          placeholder="19-01-2023"
-                          value={values.activityDate}
-                          required
+                        <EP_INPUT
+                          name={"hostInstitution"}
+                          value={values.hostInstitution}
+                          label={"Host Institution"}
+                          placeholder={"UNAM"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
+                        />
+                        <EP_INPUT
+                          name={"venueOfActivity"}
+                          value={values.venueOfActivity}
+                          label={"Venue of Activity"}
+                          placeholder={"Plaza Hotel"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
+                        />
+                        <EP_MONEY_INPUT
+                          values={values}
+                          name={"budget"}
+                          label={"Budget for Activity"}
+                        />
+                        <EP_PHONE_NUMBER_INPUT
+                          values={values}
+                          name={"personOfferingActivity.contactNumber"}
+                        />
+                        <EP_INPUT
+                          name={"fundingSource"}
+                          value={values.fundingSource}
+                          label={"Source of Funding"}
+                          placeholder={"UNAM"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
+                        />
+                        <EP_INPUT
+                          name={"numberOfParticipants"}
+                          value={values.numberOfParticipants}
+                          label={"Number of Participants"}
+                          placeholder={300}
+                          type="number"
+                          handleChange={(e) => {
+                            // Remove leading zeros from the input value
+                            const inputValue = e.target.value.replace(
+                              /^0+/,
+                              ""
+                            );
+                            e.target.value = inputValue;
+                            // Pass the modified value to the parent component's handleChange function
+                            handleChange(e);
+                          }}
+                          handleBlur={handleBlur}
+                          errors={errors}
                         />
 
-                        <label htmlFor="location">Location of Activity</label>
-                        <Field
-                          id="location"
-                          name="location"
-                          placeholder="Pioneers Park, Best street"
-                          value={values.location}
-                          required
-                        />
-                        <label htmlFor="pa">
-                          Enter maximum number of participants
-                        </label>
-                        <Field
-                          id="participantMaxNumber"
-                          name="participantMaxNumber"
-                          placeholder="Pioneers Park, Best street"
-                          value={values.participantMaxNumber}
-                          required
-                        />
-                        <label htmlFor="pa">Venue</label>
-                        <Field
-                          id="activityVenue"
-                          name="activityVenue"
-                          placeholder="Game Center"
-                          value={values.activityVenue}
-                          required
+                        <EP_MULTIPLE_SELECT
+                          options={targetAudience}
+                          placeholder="Select target audience(s)"
+                          values={values}
+                          name="targetAudience"
+                          label="Select target audience(s)"
                         />
 
                         <label htmlFor="contactNumber">Contact Number</label>
@@ -162,16 +211,24 @@ export const CreateActivityForm = () => {
                         />
 
                         <EP_TEXTAREA_INPUT
+                          handleChange={handleChange}
+                          placeholder="Enter the resources required for the activity"
+                          value={values.resourcesRequired}
+                          name="resourcesRequired"
+                          label="Resources Required"
+                        />
+                        <EP_TEXTAREA_INPUT
+                          handleChange={handleChange}
                           placeholder="Enter the description for the activity"
-                          value={values.description}
-                          name="description"
-                          label="Description"
+                          value={values.descriptionOfActivity}
+                          name="descriptionOfActivity"
+                          label="Description of Activity"
                         />
                         <EP_SELECT
-                          name={"categories"}
-                          values={"values"}
+                          name={"categoryOfActivity"}
+                          values={values}
                           selectOptions={activityCategories}
-                          label={"Activity Category"}
+                          label={"Category of Activity"}
                         />
 
                         <button

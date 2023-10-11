@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "../../assets/logo_ncrst.jpeg";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (

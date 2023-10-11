@@ -3,6 +3,11 @@ import { Select } from "antd";
 const { Option } = Select;
 
 export const EP_SELECT = ({ name, selectOptions, values, label }) => {
+  
+  const handleOnChange = (value) => {
+    console.log(`selected ${value}`);
+    values[name] = value;
+  };  
   return (
     <>
       <label htmlFor={name}>{label}</label>
@@ -10,7 +15,7 @@ export const EP_SELECT = ({ name, selectOptions, values, label }) => {
         id={name}
         name={name}
         style={{ width: "100%" }}
-        onChange={(value) => (values[name] = value)}
+        onChange={handleOnChange}
         required
       >
         {selectOptions.map((option, index) => (
