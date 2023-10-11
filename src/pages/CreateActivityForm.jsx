@@ -1,13 +1,15 @@
 import { Formik, Field, Form } from "formik";
-import { Select } from "antd";
 import axios from "axios";
-import { openNotification } from "../helpers/components/toast-notification";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import { EP_INPUT } from "../components";
+import { EP_INPUT, EP_SELECT, EP_TEXTAREA_INPUT } from "../components";
+import { createActivityFormModel } from "../form-models";
+import { routesDictionary } from "../configs/routes-dictionary";
+import { activityCategories } from "../configs";
+import { openNotification } from "../helpers/components/toast-notification";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
-const { Option } = Select;
+const { activities } = routesDictionary;
 
 export const CreateActivityForm = () => {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ export const CreateActivityForm = () => {
   function notifyFailure() {
     openNotification("Error", "Please fill in all fields");
   }
-  const selectOptions = ["Hackathon", "Workshop", "Conference"];
+
   function renderForm() {
     return (
       <Fragment>
@@ -44,7 +46,9 @@ export const CreateActivityForm = () => {
             }}
           >
             <div className="formHeader">
-              <h3>Create activity</h3>
+              <h3 style={{ fontSize: "bold", fontFamily: "system-ui" }}>
+                CREATE ACTIVITY
+              </h3>
             </div>
             <div
               style={{
@@ -52,21 +56,7 @@ export const CreateActivityForm = () => {
               }}
             >
               <Formik
-                initialValues={{
-                  categories: "",
-                  activityDate: "",
-                  activityVenue: "",
-                  title: "",
-                  description: "",
-                  organisers: { name: "", contactNumber: "" },
-                  verified: false,
-                  location: "",
-                  activitySpeakers: { name: "", contactNumber: "" },
-                  participantMaxNumber: 300,
-                  entertainment: { name: "", contactNumber: "" },
-                  activityTime: "",
-                  contactNumber: "",
-                }}
+                initialValues={createActivityFormModel}
                 validate={(values) => {}}
                 onSubmit={(values, { setSubmitting }) => {
                   axios
@@ -81,7 +71,7 @@ export const CreateActivityForm = () => {
                     .then(function (response) {
                       setSubmitting(false);
                       NotifySuccess();
-                      navigate("/activitys");
+                      navigate(activities);
                     })
                     .catch(function (error) {
                       notifyFailure();
@@ -100,108 +90,103 @@ export const CreateActivityForm = () => {
                 }) => {
                   return (
                     <Form>
-                    <div
-                      className="frame"
-                      style={{
-                        backgroundColor: "#ffffff",
-                        borderRadius: "2px",
-                        padding: "1rem"
-                      }}
-                    >
-                      <EP_INPUT
-                        name={"title"}
-                        value={values.title}
-                        label={"Name of Activity"}
-                        placeholder={"Hackathon Week of Code"}
-                        handleChange={handleChange}
-                        handleBlur={handleBlur}
-                        errors={errors}
-
-                      />
-                      <label htmlFor="title">Name of Activity</label>
-                      <Field
-                        id="title"
-                        name="title"
-                        placeholder="Hackathon Week of Code"
-                        value={values.title}
-                        required
-                      />
-                      <label htmlFor="activityDate">Date of Activity</label>
-                      <Field
-                        id="activityDate"
-                        name="activityDate"
-                        placeholder="19-01-2023"
-                        value={values.activityDate}
-                        required
-                      />
-
-                      <label htmlFor="location">Location of Activity</label>
-                      <Field
-                        id="location"
-                        name="location"
-                        placeholder="Pioneers Park, Best street"
-                        value={values.location}
-                        required
-                      />
-                      <label htmlFor="pa">Enter maximum number of participants</label>
-                      <Field
-                        id="participantMaxNumber"
-                        name="participantMaxNumber"
-                        placeholder="Pioneers Park, Best street"
-                        value={values.participantMaxNumber}
-                        required
-                      />
-                      <label htmlFor="pa">Venue</label>
-                      <Field
-                        id="activityVenue"
-                        name="activityVenue"
-                        placeholder="Game Center"
-                        value={values.activityVenue}
-                        required
-                      />
-
-                      <label htmlFor="contactNumber">Contact Number</label>
-                      <Field
-                        id="contactNumber"
-                        name="contactNumber"
-                        placeholder="08123456789"
-                        value={values.contactNumber}
-                        required
-                      />
-                      <label htmlFor="description">Description</label>
-                      <Field
-                        id="description"
-                        name="description"
-                        placeholder="08123456789"
-                        value={values.description}
-                        required
-                      />
-                      <label htmlFor="active">activity Category?</label>
-                      <Select
-                        name="categories"
-                        style={{ width: "100%" }}
-                        onChange={(value) => (values.categories = value)}
-                        required
-                      >
-                        {selectOptions.map((option) => (
-                          <Option value={option.toUpperCase()}>
-                            {option.toUpperCase()}
-                          </Option>
-                        ))}
-                      </Select>
-                      <button
-                        className="my-2"
+                      <div
+                        className="frame"
                         style={{
-                          backgroundColor: "#242323",
-                          color: "#ffffff"
+                          backgroundColor: "#ffffff",
+                          borderRadius: "2px",
+                          padding: "1rem",
                         }}
-                        type="submit"
-                        disabled={isSubmitting}
                       >
-                        Submit
-                      </button>
-                    </div>
-                  </Form>
+                        <EP_INPUT
+                          name={"nameOfActivity"}
+                          value={values.nameOfActivity}
+                          label={"Name of Activity"}
+                          placeholder={"Hackathon Week of Code"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
+                        />
+                        <EP_INPUT
+                          name={"title"}
+                          value={values.title}
+                          label={"Name of Activity"}
+                          placeholder={"Hackathon Week of Code"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
+                        />
+                        <label htmlFor="activityDate">Date of Activity</label>
+                        <Field
+                          id="activityDate"
+                          name="activityDate"
+                          placeholder="19-01-2023"
+                          value={values.activityDate}
+                          required
+                        />
+
+                        <label htmlFor="location">Location of Activity</label>
+                        <Field
+                          id="location"
+                          name="location"
+                          placeholder="Pioneers Park, Best street"
+                          value={values.location}
+                          required
+                        />
+                        <label htmlFor="pa">
+                          Enter maximum number of participants
+                        </label>
+                        <Field
+                          id="participantMaxNumber"
+                          name="participantMaxNumber"
+                          placeholder="Pioneers Park, Best street"
+                          value={values.participantMaxNumber}
+                          required
+                        />
+                        <label htmlFor="pa">Venue</label>
+                        <Field
+                          id="activityVenue"
+                          name="activityVenue"
+                          placeholder="Game Center"
+                          value={values.activityVenue}
+                          required
+                        />
+
+                        <label htmlFor="contactNumber">Contact Number</label>
+                        <Field
+                          id="contactNumber"
+                          name="contactNumber"
+                          placeholder="08123456789"
+                          value={values.contactNumber}
+                          required
+                        />
+
+                        <EP_TEXTAREA_INPUT
+                          placeholder="Enter the description for the activity"
+                          value={values.description}
+                          name="description"
+                          label="Description"
+                        />
+                        <EP_SELECT
+                          name={"categories"}
+                          values={"values"}
+                          selectOptions={activityCategories}
+                          label={"Activity Category"}
+                        />
+
+                        <button
+                          className="my-2"
+                          style={{
+                            backgroundColor: "#242323",
+                            color: "#ffffff",
+                          }}
+                          type="submit"
+                          disabled={isSubmitting}
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </Form>
                   );
                 }}
               </Formik>

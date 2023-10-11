@@ -13,8 +13,10 @@ export const EP_SELECT = ({ name, selectOptions, values, label }) => {
         onChange={(value) => (values[name] = value)}
         required
       >
-        {selectOptions.map((option) => (
-          <Option value={option.toUpperCase()}>{option.toUpperCase()}</Option>
+        {selectOptions.map((option, index) => (
+          <Option key={index} value={option.toUpperCase()}>
+            {option.toUpperCase()}
+          </Option>
         ))}
       </Select>
     </>

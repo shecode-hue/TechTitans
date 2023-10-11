@@ -1,4 +1,4 @@
-export const activityFormModel = {
+export const createActivityFormModel = {
   nameOfActivity: "",
   descriptionOfActivity: "",
   dateOfActivity: "",
