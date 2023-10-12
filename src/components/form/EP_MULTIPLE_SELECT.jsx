@@ -34,7 +34,6 @@ export const EP_MULTIPLE_SELECT = ({
         }}
         name={name}
         placeholder={placeholder}
-        i
         defaultValue={defaultValue}
         onChange={handleChange}
         options={selectOptions}

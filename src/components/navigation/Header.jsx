@@ -6,14 +6,13 @@ import { USER_TYPES, routesDictionary } from "../../configs";
 import { useLogout } from "../../hooks";
 import { Avatar } from "antd";
 
-const { home, book_activity, create_activity, activities, login, register } =
+const { home, create_activity, activities, login, register } =
   routesDictionary;
 
 const Header = () => {
   const { user } = useContext(UserContext);
   const { logout: logUserOut } = useLogout();
 
-  console.log("header user", user);
   return (
     <div className="header header-fixed u-unselectable header-animated ">
       <div className="header-brand">
@@ -34,7 +33,7 @@ const Header = () => {
       <div className="header-nav" id="header-menu">
         <div className="nav-right">
           <div className="nav-item">
-            <Link to={user ? book_activity : login}>
+            <Link to={user ? activities : login}>
               <button className="btn-danger animated pound">
                 Book Latest Activities
               </button>

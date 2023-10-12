@@ -12,3 +12,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+:where(.css-dev-only-do-not-override-amq5gd).ant-float-btn
+  .ant-float-btn-body
+  .ant-float-btn-content
+  .ant-float-btn-icon {
+  width: 17px !important;
+}
+
+:where(.css-dev-only-do-not-override-amq5gd).ant-float-btn
+  .ant-float-btn-body
+  .ant-float-btn-content {
+  padding: 0 !important;
+}
+
+:where(.css-dev-only-do-not-override-amq5gd).ant-float-btn-default
+  .ant-float-btn-body {
+  width: 100px;
+  background-color: grey;
+  margin-left: -47px;
+}

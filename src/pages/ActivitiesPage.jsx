@@ -16,7 +16,7 @@ export const ActivitiesPage = () => {
   }
 
   return loadingActivities ? (
-    <LoadingPage height="54vh"/>
+    <LoadingPage height="54vh" />
   ) : (
     <div
       style={{
@@ -31,7 +31,8 @@ export const ActivitiesPage = () => {
         className="container d-flex"
         style={{
           minHeight: "53.6vh",
-          width: "fit-content",
+          width: "100%", 
+          flexWrap: "wrap", 
           justifyContent: "center",
           alignItems: "center",
           gap: "1rem",

@@ -24,7 +24,7 @@ export const CreateActivityForm = () => {
   const navigate = useNavigate();
 
   function NotifySuccess() {
-    openNotification("Success", "activity Created!!!");
+    openNotification("Success", "Activity Created!!!");
   }
   function notifyFailure() {
     openNotification("Error", "Please fill in all fields");
@@ -93,7 +93,6 @@ export const CreateActivityForm = () => {
                   values,
                   handleChange,
                   handleBlur,
-                  handleSubmit,
                   setFieldValue,
                   errors,
                   isSubmitting,

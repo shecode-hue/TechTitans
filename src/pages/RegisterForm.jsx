@@ -89,7 +89,7 @@ export const RegisterForm = () => {
                   <EP_INPUT
                     name={"name"}
                     value={values.name}
-                    label={"Name"}
+                    label={"Fullname"}
                     placeholder={"John Doe"}
                     handleChange={handleChange}
                     handleBlur={handleBlur}

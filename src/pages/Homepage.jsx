@@ -9,7 +9,7 @@ import { UserContext } from "../context";
 import { useFetchActivities } from "../hooks";
 import { createCalendarActivity } from "../helpers";
 
-const { activities, login, book_activity } = routesDictionary;
+const { activities, login } = routesDictionary;
 
 export const Homepage = () => {
   const { user } = useContext(UserContext);
@@ -85,7 +85,7 @@ export const Homepage = () => {
       <div className="button-container">
         <button
           className="pulse-button"
-          onClick={() => navigate(user ? book_activity : login)}
+          onClick={() => navigate(user ? activities : login)}
         >
           Book an activity
         </button>

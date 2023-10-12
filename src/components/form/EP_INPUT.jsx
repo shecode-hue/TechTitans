@@ -8,11 +8,13 @@ export const EP_INPUT = ({
   errors,
   type = "text",
   required = false,
+  disabled,
 }) => {
   return (
     <>
       <label htmlFor={name}>{label}</label>
       <input
+        disabled={disabled}
         placeholder={placeholder}
         type={type}
         name={name}
