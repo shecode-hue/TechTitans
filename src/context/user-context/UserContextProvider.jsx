@@ -19,11 +19,12 @@ const UserContextProvider = ({ children }) => {
   const { getItem } = useLocalStorage("user");
 
   useEffect(() => {
-    setUser(getItem());
-  }, [user]);
+    setUser(getItem()); 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const contextValue = {
-    user: JSON.parse(window.localStorage.getItem("user")),
+    user: user,
     setUser,
   };
 

@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { openNotification } from "../helpers/components/toast-notification";
 import {
   EP_BUTTON,
@@ -8,10 +8,12 @@ import {
   EP_PHONE_NUMBER_INPUT,
   EP_SELECT,
 } from "../components";
-import { userTypes } from "../configs";
+import { userTypes, routesDictionary } from "../configs";
 import { registerFormModel } from "../form-models";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
+
+const { login } = routesDictionary;
 
 export const RegisterForm = () => {
   let navigate = useNavigate();
@@ -31,7 +33,7 @@ export const RegisterForm = () => {
       <div
         className="frame bg-white"
         style={{
-          width: "80%",
+          width: "60vh",
         }}
       >
         <div className="formHeader">
@@ -53,7 +55,7 @@ export const RegisterForm = () => {
                     NODE_ENV === "production"
                       ? REACT_APP_API_URL_PROD
                       : REACT_APP_API_URL_DEV
-                  }/api/user`,
+                  }/api/register`,
                   values
                 )
                 .then(function () {
@@ -76,13 +78,11 @@ export const RegisterForm = () => {
             {({
               values,
               errors,
-              touched,
               handleChange,
               setFieldValue,
               handleBlur,
               handleSubmit,
               isSubmitting,
-              /* and other goodies */
             }) => {
               return (
                 <form onSubmit={handleSubmit}>
@@ -127,6 +127,8 @@ export const RegisterForm = () => {
                     label={"Select User Type"}
                     name={"userType"}
                   />
+                  <Link to={login}>Already have an account? Login here</Link>
+
                   <div className="space space--lg ..."></div>
                   <EP_BUTTON disabled={isSubmitting} />
                 </form>

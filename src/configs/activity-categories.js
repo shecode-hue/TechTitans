@@ -7,5 +7,4 @@ export const activityCategories = [
   "Innovation Press",
   "Workshops & Talk Shops",
   "Firm Festivals & Formal Events",
-  "Other",
 ];

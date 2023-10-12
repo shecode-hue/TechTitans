@@ -1,18 +1,16 @@
 import { Spin } from "antd";
 
-const LoadingPage = ({message}) => (
+export const LoadingPage = ({ message, height = "100vh" }) => (
   <div
     className="container"
     style={{
-      height: "100vh",
+      height: height,
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
     }}
   >
-    <Spin tip={`${message}`}>
-      
-    </Spin>
+    <Spin tip={`${message}`}></Spin>
   </div>
 );
 

@@ -2,18 +2,23 @@ import React, { useContext } from "react";
 import { Formik } from "formik";
 import axios from "axios";
 import { openNotification } from "../helpers/components/toast-notification";
-import { UserContext } from "../context/User.context";
-import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context";
+import { Link, useNavigate } from "react-router-dom";
 import { EP_BUTTON, EP_INPUT } from "../components";
+import { useLocalStorage } from "../hooks";
+import { routesDictionary } from "../configs";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
+
+const { activities, register } = routesDictionary;
 
 export const LoginForm = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  function NotifySuccess() {
-    openNotification("Success", "You have successfully logged in");
-    navigate("/home");
+  const { setItem } = useLocalStorage("user");
+  function NotifySuccess(message) {
+    openNotification("Success", `Hi, ${message}`);
+    navigate(activities);
   }
 
   function notifyFailure() {
@@ -21,11 +26,11 @@ export const LoginForm = () => {
   }
 
   return (
-    <div className="container ">
+    <div className="container " style={{ minHeight: "54vh" }}>
       <div
         className="frame bg-white"
         style={{
-          width: "60%",
+          width: "50vh",
         }}
       >
         <div className="formHeader">
@@ -53,16 +58,17 @@ export const LoginForm = () => {
                   }/api/login`,
                   values
                 )
-                .then(function (user) {
-                  const { data } = user;
-                  setUser(data);
-                  localStorage.setItem("user", JSON.stringify(data));
-                  if (data.name) {
+                .then(function (response) {
+                  const { data } = response;
+                  const { user } = data;
+                  if (user) {
+                    setUser(user);
+                    setItem(user);
                     setSubmitting(false);
                     values.username = "";
                     values.password = "";
 
-                    NotifySuccess();
+                    NotifySuccess(user.name);
                   } else {
                     notifyFailure();
                   }
@@ -105,8 +111,9 @@ export const LoginForm = () => {
                   handleBlur={handleBlur}
                   errors={errors}
                 />
-
+                <Link to={register}>Don't have an account? Register here</Link>
                 <div className="space space--lg ..."></div>
+
                 <EP_BUTTON disabled={isSubmitting} />
               </form>
             )}

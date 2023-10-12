@@ -4,7 +4,7 @@ import { notification } from "antd";
 export const openNotification = (type, message) => {
   notification.open({
     style: {
-      marginTop: 60,
+      top: 60,
     },
     message: type,
     description: message,

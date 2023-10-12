@@ -1,21 +1,19 @@
 import logo from "../../assets/logo.png";
 import { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../context/User.context";
-import { routesDictionary } from "../../configs";
+import { UserContext } from "../../context";
+import { USER_TYPES, routesDictionary } from "../../configs";
+import { useLogout } from "../../hooks";
+import { Avatar } from "antd";
 
-const {
-  home,
-  book_activity,
-  create_activity,
-  activities,
-  login,
-  register,
-  logout,
-} = routesDictionary;
+const { home, book_activity, create_activity, activities, login, register } =
+  routesDictionary;
 
 const Header = () => {
   const { user } = useContext(UserContext);
+  const { logout: logUserOut } = useLogout();
+
+  console.log("header user", user);
   return (
     <div className="header header-fixed u-unselectable header-animated ">
       <div className="header-brand">
@@ -36,7 +34,7 @@ const Header = () => {
       <div className="header-nav" id="header-menu">
         <div className="nav-right">
           <div className="nav-item">
-            <Link to={book_activity}>
+            <Link to={user ? book_activity : login}>
               <button className="btn-danger animated pound">
                 Book Latest Activities
               </button>
@@ -49,25 +47,29 @@ const Header = () => {
                   Browse for Activities
                 </Link>
               </div>
+              {user.userType === USER_TYPES.ORGANIZER && (
+                <div className={`nav-item`}>
+                  <Link to={create_activity} className={` text-black`}>
+                    Create Activity
+                  </Link>
+                </div>
+              )}
               <div className={`nav-item`}>
-                <Link to={create_activity} className={` text-black`}>
-                  Create Activity
-                </Link>
+                <Avatar
+                  style={{
+                    backgroundColor: "darkslategray",
+                    verticalAlign: "middle",
+                  }}
+                  size="large"
+                  gap={2}
+                >
+                  {user.name}
+                </Avatar>
               </div>
             </Fragment>
           ) : (
             ""
           )}
-          <div className="nav-item">
-            <Link to={activities} className={` text-black`}>
-              Browse for Activities
-            </Link>
-          </div>
-          <div className="nav-item">
-            <Link to={create_activity} className={` text-black`}>
-              Create Activity
-            </Link>
-          </div>
 
           <div className="nav-item has-sub toggle-hover" id="dropdown">
             {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -95,8 +97,8 @@ const Header = () => {
               )}
               {user ? (
                 //eslint-disable-next-line jsx-a11y/aria-role
-                <li role="menu-item">
-                  <Link to={logout}>Logout</Link>
+                <li role="menu-item" onClick={() => logUserOut()}>
+                  <Link to="#">Logout</Link>
                 </li>
               ) : (
                 ""

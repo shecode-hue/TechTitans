@@ -5,7 +5,6 @@ const { Option } = Select;
 export const EP_SELECT = ({ name, selectOptions, values, label }) => {
   
   const handleOnChange = (value) => {
-    console.log(`selected ${value}`);
     values[name] = value;
   };  
   return (

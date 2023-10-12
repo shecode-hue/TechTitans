@@ -12,7 +12,6 @@ export const EP_MULTIPLE_SELECT = ({
   showSearch = false
 }) => {
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
     values[name] = value;
   };
 

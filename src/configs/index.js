@@ -4,3 +4,4 @@ export * from "./routes.config";
 export * from "./science-activity-sliders";
 export * from "./target-audience";
 export * from "./user-types";
+export * from "./user.config";

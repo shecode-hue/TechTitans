@@ -3,7 +3,6 @@ import { InputNumber } from "antd";
 
 export const EP_MONEY_INPUT = ({ name, values, label }) => {
   const onChange = (value) => {
-    console.log("changed", value);
     values[name] = value;
   };
   return (

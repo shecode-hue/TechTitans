@@ -35,7 +35,7 @@ export const BookActivityForm = () => {
         >
           Back
         </button>
-        <div className="container">
+        <div className="container" style={{ minHeight: "54vh" }}>
           <div
             className="frame bg-white"
             style={{

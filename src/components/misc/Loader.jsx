@@ -1,7 +1,7 @@
 import React from "react";
 import { Progress } from 'antd';
 
-const Loader = ({percent}) => {
+export const Loader = ({percent}) => {
     const [increase, setIncrease] = React.useState(0);
     setTimeout(() => {
         setIncrease(10);

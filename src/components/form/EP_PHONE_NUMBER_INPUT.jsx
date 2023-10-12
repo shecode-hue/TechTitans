@@ -11,7 +11,7 @@ export function EP_PHONE_NUMBER_INPUT({
   setFieldValue,
 }) {
   const onChange = (value) => {
-    if (value && value.replace(/\D/g, "").length === 9) {
+    if (value && value.replace(/\D/g, "").length === 11) {
       setFieldValue(name, value);
     }
   };

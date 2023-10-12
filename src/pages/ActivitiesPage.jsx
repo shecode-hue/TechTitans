@@ -1,99 +1,83 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import image1 from "../assets/img_1.jpeg";
 import { NoDATA } from "../components/misc";
+import routesDictionary from "../configs/routes-dictionary";
+import { useFetchActivities } from "../hooks";
+import { LoadingPage } from "../helpers/";
 
-const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
+const { book_activity } = routesDictionary;
 
 export const ActivitiesPage = () => {
-  const [activities, setActivities] = useState();
-  const [loadingActivities, setLoadingActivities] = useState(false);
-  const [error, setError] = useState();
+  const { activities, error, loadingActivities } = useFetchActivities();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    //function to fetch fires from the database
-    function fetchData() {
-      axios
-        .get(
-          `${
-            NODE_ENV === "production"
-              ? REACT_APP_API_URL_PROD
-              : REACT_APP_API_URL_DEV
-          }/api/activities`
-        )
-        .then(function (response) {
-          const { data } = response;
-          setActivities(data.activities);
-          setLoadingActivities(true);
-        })
-        .catch(function (error) {
-          setError(error);
-          console.log("Error: ", error);
-        });
-    }
-    fetchData();
-  }, []);
-
   if (error) {
-    return <NoDATA title="Server Offline"/>;
+    return <NoDATA title="Server Offline" />;
   }
 
-  return (
+  return loadingActivities ? (
+    <LoadingPage height="54vh"/>
+  ) : (
     <div
-      className="container d-flex"
       style={{
-        width: "fit-content",
-        flexDirection: "row",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
-        gap: "1rem",
-        padding: "1rem",
+        justifyContent: "center",
       }}
     >
-      {activities &&
-        activities.map((activity) => {
-          return (
-            <div
-              className="card"
-              style={{ width: "350px" }}
-              onClick={() => navigate()}
-            >
+      <h3>Activities</h3>
+      <div
+        className="container d-flex"
+        style={{
+          minHeight: "53.6vh",
+          width: "fit-content",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "1rem",
+          padding: "1rem",
+        }}
+      >
+        {activities &&
+          activities.map((activity, index) => {
+            return (
               <div
-                className="card__container"
-                style={{ display: "flex", flexDirection: " row" }}
+                key={index}
+                className="card"
+                style={{ width: "350px" }}
+                onClick={() => navigate(book_activity, { state: { activity } })}
               >
-                <div
-                  className="card__image"
-                  style={{
-                    backgroundImage: `url(${image1})`,
-                  }}
-                ></div>
-                <div className="card__title-container">
-                  <p className="title">{activity.title}</p>
-                  <span className="subtitle">{activity.location}</span>
+                <div className="card__container" style={{ display: "flex" }}>
+                  <div
+                    className="card__image"
+                    style={{
+                      backgroundImage: `url(${image1})`,
+                    }}
+                  ></div>
+                  <div className="card__title-container">
+                    <p className="title">{activity.nameOfActivity}</p>
+                    <span className="subtitle">
+                      {activity.locationOfActivity}
+                    </span>
+                  </div>
+                </div>
+                <div className="card__footer">
+                  <div className="u-text-center">
+                    <span>{`Venue: ${activity.venueOfActivity}`}</span>
+                    <br />
+                    <span>{`Time: ${activity.timeOfActivity} `}</span>
+                    <br />
+                    <span>{`Date: ${activity.dateOfActivity}`}</span>
+                    <br />
+                    <span>{`Contact Number: ${activity.personOfferingActivity.contactNumber}`}</span>
+                    <br />
+                    <span>{activity.descriptionOfActivity}</span>
+                  </div>
                 </div>
               </div>
-              <div className="content u-center">
-                <div
-                  className={`${
-                    loadingActivities ? "none" : "animated loading hide-text"
-                  }`}
-                ></div>
-              </div>
-
-              <div className="card__footer">
-                <div className="u-text-center">
-                  <span>{activity.description}</span>
-                  <br />
-                  <span>{`Date: ${activity.activityDate}`}</span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
     </div>
   );
 };
