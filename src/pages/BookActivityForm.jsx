@@ -19,7 +19,6 @@ export const BookActivityForm = () => {
 
   const { activity: activeActivity } = loction.state;
 
-  console.log("location", user);
   function NotifySuccess() {
     openNotification("Success", "Booking Created!!!");
   }
