@@ -6,11 +6,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserContext } from "./context/User.context";
 import LoadingPage from "./helpers/components/loading-page";
 import { routes } from "./configs";
+import { FloatButton } from "antd";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState();
-  
+
   useEffect(() => {
     localStorage.getItem("user") &&
       setUser(JSON.parse(localStorage.getItem("user")));
@@ -29,9 +30,10 @@ function App() {
             <div className="space space--lg ..."></div>
             <Routes>
               {routes.map((route, index) => (
-                <Route {...route} key={index}/>
+                <Route {...route} key={index} />
               ))}
             </Routes>
+            <FloatButton.BackTop />
             <Footer />
           </UserContext.Provider>
         </Router>

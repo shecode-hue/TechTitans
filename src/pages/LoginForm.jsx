@@ -4,6 +4,7 @@ import axios from "axios";
 import { openNotification } from "../helpers/components/toast-notification";
 import { UserContext } from "../context/User.context";
 import { useNavigate } from "react-router-dom";
+import { EP_BUTTON, EP_INPUT } from "../components";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
 
@@ -28,7 +29,7 @@ export const LoginForm = () => {
         }}
       >
         <div className="formHeader">
-          <h3>Login</h3>
+          <h3>LOGIN</h3>
         </div>
         <div
           style={{
@@ -85,35 +86,28 @@ export const LoginForm = () => {
               /* and other goodies */
             }) => (
               <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
-                <input
-                  type="text"
-                  name="username"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.username}
-                  required
+                <EP_INPUT
+                  name={"username"}
                   value={values.username}
+                  label={"Username"}
+                  placeholder={"elegantMuse"}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  errors={errors}
                 />
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.password}
-                  required
+                <EP_INPUT
+                  name={"password"}
                   value={values.password}
+                  label={"Password"}
+                  placeholder={"********"}
+                  type="password"
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  errors={errors}
                 />
 
                 <div className="space space--lg ..."></div>
-                <button
-                  className="btn-dark"
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  Submit
-                </button>
+                <EP_BUTTON disabled={isSubmitting} />
               </form>
             )}
           </Formik>

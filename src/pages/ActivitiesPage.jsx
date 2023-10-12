@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import image1 from "../assets/img_1.jpeg";
-import {} from "..";
+import { NoDATA } from "../components/misc";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
 
 export const ActivitiesPage = () => {
-  const [activitys, setactivitys] = useState();
-  const [loadingactivitys, setLoadingactivitys] = useState(false);
+  const [activities, setActivities] = useState();
+  const [loadingActivities, setLoadingActivities] = useState(false);
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,20 +21,24 @@ export const ActivitiesPage = () => {
             NODE_ENV === "production"
               ? REACT_APP_API_URL_PROD
               : REACT_APP_API_URL_DEV
-          }/api/activitys`
+          }/api/activities`
         )
         .then(function (response) {
           const { data } = response;
-          setactivitys(data.activitys);
-          setLoadingactivitys(true);
+          setActivities(data.activities);
+          setLoadingActivities(true);
         })
         .catch(function (error) {
-          console.log(error);
+          setError(error);
+          console.log("Error: ", error);
         });
     }
     fetchData();
   }, []);
 
+  if (error) {
+    return <NoDATA title="Server Offline"/>;
+  }
 
   return (
     <div
@@ -48,10 +53,14 @@ export const ActivitiesPage = () => {
         padding: "1rem",
       }}
     >
-      {activitys &&
-        activitys.map((activity) => {
+      {activities &&
+        activities.map((activity) => {
           return (
-            <div className="card" style={{ width: "350px" }} onClick={()=> navigate()}>
+            <div
+              className="card"
+              style={{ width: "350px" }}
+              onClick={() => navigate()}
+            >
               <div
                 className="card__container"
                 style={{ display: "flex", flexDirection: " row" }}
@@ -70,21 +79,16 @@ export const ActivitiesPage = () => {
               <div className="content u-center">
                 <div
                   className={`${
-                    loadingactivitys ? "none" : "animated loading hide-text"
+                    loadingActivities ? "none" : "animated loading hide-text"
                   }`}
-                >
-                </div>
+                ></div>
               </div>
 
               <div className="card__footer">
                 <div className="u-text-center">
-                  <span>
-                  {activity.description}
-                  </span>
+                  <span>{activity.description}</span>
                   <br />
-                  <span>
-                  {`Date: ${activity.activityDate}`}
-                  </span>
+                  <span>{`Date: ${activity.activityDate}`}</span>
                 </div>
               </div>
             </div>

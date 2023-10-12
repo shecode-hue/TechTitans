@@ -1,24 +1,31 @@
-import "react-phone-number-input/style.css";
+import React from "react";
 import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 export function EP_PHONE_NUMBER_INPUT({
   values,
-  placeholder = "Enter phone number",
+  placeholder = "81 123 4567",
   country = "NA",
   name,
   label,
+  setFieldValue,
 }) {
   const onChange = (value) => {
-    console.log("changed", value);
-    values[name] = value;
+    if (value && value.replace(/\D/g, "").length === 9) {
+      setFieldValue(name, value);
+    }
   };
-  // `value` will be the parsed phone number in E.164 format.
-  // Example: "+12133734253".
+
   return (
-    <PhoneInput
-      country={country}
-      placeholder={placeholder}
-      onChange={onChange}
-    />
+    <>
+      <label htmlFor={name}>{label}</label>
+      <PhoneInput
+        numberInputProps={{ name: name }}
+        value={values[name]}
+        defaultCountry={"NA"}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
+    </>
   );
 }

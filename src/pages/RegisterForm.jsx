@@ -1,15 +1,20 @@
 import { Formik } from "formik";
 import axios from "axios";
-import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { openNotification } from "../helpers/components/toast-notification";
+import {
+  EP_BUTTON,
+  EP_INPUT,
+  EP_PHONE_NUMBER_INPUT,
+  EP_SELECT,
+} from "../components";
+import { userTypes } from "../configs";
+import { registerFormModel } from "../form-models";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
-const { Option } = Select;
 
 export const RegisterForm = () => {
   let navigate = useNavigate();
-  const selectOptions = ["Participant", "Organiser"];
 
   // successful submission function
   const handleSuccess = () => {
@@ -26,33 +31,32 @@ export const RegisterForm = () => {
       <div
         className="frame bg-white"
         style={{
-          width: "80%"
+          width: "80%",
         }}
       >
         <div className="formHeader">
-          <h3>Register</h3>
+          <h3>REGISTER</h3>
         </div>
 
         <div
           style={{
-            margin: "3rem"
+            margin: "3rem",
           }}
         >
           <Formik
-            initialValues={{
-              name: "",
-              password: "",
-              contactNumber: "",
-              username: "",
-              userType: "",
-            }}
+            initialValues={registerFormModel}
             validate={(values) => {}}
             onSubmit={(values, { setSubmitting }) => {
               axios
-                .post(`${ NODE_ENV === "production"
-                ? REACT_APP_API_URL_PROD
-                : REACT_APP_API_URL_DEV}/api/user`, values)
-                .then(function (response) {
+                .post(
+                  `${
+                    NODE_ENV === "production"
+                      ? REACT_APP_API_URL_PROD
+                      : REACT_APP_API_URL_DEV
+                  }/api/user`,
+                  values
+                )
+                .then(function () {
                   setSubmitting(false);
                   values.name = "";
                   values.password = "";
@@ -74,74 +78,60 @@ export const RegisterForm = () => {
               errors,
               touched,
               handleChange,
+              setFieldValue,
               handleBlur,
               handleSubmit,
-              isSubmitting
+              isSubmitting,
               /* and other goodies */
-            }) => (
-              <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.name}
-                  required
-                />
-                <label htmlFor="contactNumber">Contact Number</label>
-                <input
-                  type="text"
-                  name="contactNumber"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.contactNumber}
-                  required
-                />
-                <label htmlFor="username">Username</label>
-                <input
-                  type="text"
-                  name="username"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  // add error handling
+            }) => {
+              return (
+                <form onSubmit={handleSubmit}>
+                  <EP_INPUT
+                    name={"name"}
+                    value={values.name}
+                    label={"Name"}
+                    placeholder={"John Doe"}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    errors={errors}
+                  />
+                  <EP_INPUT
+                    name={"username"}
+                    value={values.username}
+                    label={"Username"}
+                    placeholder={"elegantMuse"}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    errors={errors}
+                  />
 
-                  value={values.username}
-                  required
-                />
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  required
-                  error={errors.password && touched.password}
-                />
-                 <label htmlFor="active">Select User Type</label>
-                      <Select
-                        name="categories"
-                        style={{ width: "100%" }}
-                        onChange={(value) => (values.userType = value)}
-                        required
-                      >
-                        {selectOptions.map((option) => (
-                          <Option value={option.toUpperCase()}>
-                            {option.toUpperCase()}
-                          </Option>
-                        ))}
-                      </Select>
-                <div className="space space--lg ..."></div>
-                <button
-                  className="btn-dark"
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  Submit
-                </button>
-              </form>
-            )}
+                  <EP_INPUT
+                    name={"password"}
+                    value={values.password}
+                    label={"Password"}
+                    type="password"
+                    placeholder={"********"}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    errors={errors}
+                  />
+                  <EP_PHONE_NUMBER_INPUT
+                    name={"contactNumber"}
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    label={"Contact Number"}
+                  />
+                  <EP_SELECT
+                    values={values}
+                    selectOptions={userTypes}
+                    label={"Select User Type"}
+                    name={"userType"}
+                  />
+                  <div className="space space--lg ..."></div>
+                  <EP_BUTTON disabled={isSubmitting} />
+                </form>
+              );
+            }}
           </Formik>
         </div>
       </div>

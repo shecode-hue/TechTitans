@@ -1,4 +1,4 @@
-import { Formik, Field, Form } from "formik";
+import { Formik, Form } from "formik";
 import axios from "axios";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
@@ -94,10 +94,16 @@ export const CreateActivityForm = () => {
                   handleChange,
                   handleBlur,
                   handleSubmit,
+                  setFieldValue,
                   errors,
                   isSubmitting,
                 }) => {
-                  console.log("values", values);
+                  const {
+                    name,
+                    email,
+                    institution,
+                    designation,
+                  } = values.personOfferingActivity;
                   return (
                     <Form>
                       <div
@@ -161,8 +167,47 @@ export const CreateActivityForm = () => {
                           label={"Budget for Activity"}
                         />
                         <EP_PHONE_NUMBER_INPUT
+                          label={"Contact Number of Person Offering Activity"}
                           values={values}
+                          setFieldValue={setFieldValue}
                           name={"personOfferingActivity.contactNumber"}
+                        />
+                        <EP_INPUT
+                          name={"personOfferingActivity.name"}
+                          value={name}
+                          label={"Name of Person Offering Activity"}
+                          placeholder={"John Doe"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
+                        />
+                        <EP_INPUT
+                          name={"personOfferingActivity.email"}
+                          value={email}
+                          label={"Email Address of Person Offering Activity"}
+                          type="email"
+                          placeholder={"john@mail.com"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
+                        />
+                        <EP_INPUT
+                          name={"personOfferingActivity.institution"}
+                          value={institution}
+                          label={"Institution of Person Offering Activity"}
+                          placeholder={"UNAM"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
+                        />
+                        <EP_INPUT
+                          name={"personOfferingActivity.designation"}
+                          value={designation}
+                          label={"Designation of Person Offering Activity"}
+                          placeholder={"Designation"}
+                          handleChange={handleChange}
+                          handleBlur={handleBlur}
+                          errors={errors}
                         />
                         <EP_INPUT
                           name={"fundingSource"}
@@ -199,15 +244,6 @@ export const CreateActivityForm = () => {
                           values={values}
                           name="targetAudience"
                           label="Select target audience(s)"
-                        />
-
-                        <label htmlFor="contactNumber">Contact Number</label>
-                        <Field
-                          id="contactNumber"
-                          name="contactNumber"
-                          placeholder="08123456789"
-                          value={values.contactNumber}
-                          required
                         />
 
                         <EP_TEXTAREA_INPUT

@@ -22,6 +22,7 @@
   color: white;
   padding: 20px;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 .slide-content h2{
 color:rgb(254,201,14);

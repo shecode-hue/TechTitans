@@ -1,6 +1,6 @@
 import React from "react";
 
-export const EP_BUTTON = ({ disabled, type = "submit" }) => {
+export const EP_BUTTON = ({ disabled, type = "submit", text = "Submit" }) => {
   return (
     <button
       className="my-2"
@@ -11,7 +11,7 @@ export const EP_BUTTON = ({ disabled, type = "submit" }) => {
       type={type}
       disabled={disabled}
     >
-      Submit
+      {text}
     </button>
   );
 };

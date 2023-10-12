@@ -1,11 +1,18 @@
-import logo from "../../assets/logo_ncrst.jpeg";
+import logo from "../../assets/logo.png";
 import { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/User.context";
 import { routesDictionary } from "../../configs";
 
-const { home, book_activity, create_activity, activities, login, register, logout } =
-  routesDictionary;
+const {
+  home,
+  book_activity,
+  create_activity,
+  activities,
+  login,
+  register,
+  logout,
+} = routesDictionary;
 
 const Header = () => {
   const { user } = useContext(UserContext);
@@ -14,12 +21,10 @@ const Header = () => {
       <div className="header-brand">
         <div className="nav-item no-hover">
           <Link to={home}>
-            <img
-              src={logo}
-              alt="fire department logo"
-              style={{ height: "4rem" }}
-            />
-            <p className="mx-2 my-2">SCI_CONNECT</p>
+            <img src={logo} alt="sci-connect logo" style={{ height: "4rem" }} />
+            <p className="mx-2 my-2" style={{ fontFamily: "monospace" }}>
+              SCI_CONNECT
+            </p>
           </Link>
         </div>
         <div className="nav-item nav-btn" id="header-btn">
@@ -46,7 +51,7 @@ const Header = () => {
               </div>
               <div className={`nav-item`}>
                 <Link to={create_activity} className={` text-black`}>
-                  Add an Activity
+                  Create Activity
                 </Link>
               </div>
             </Fragment>
@@ -55,12 +60,12 @@ const Header = () => {
           )}
           <div className="nav-item">
             <Link to={activities} className={` text-black`}>
-              Browse an Activity
+              Browse for Activities
             </Link>
           </div>
           <div className="nav-item">
             <Link to={create_activity} className={` text-black`}>
-              Add an activity
+              Create Activity
             </Link>
           </div>
 

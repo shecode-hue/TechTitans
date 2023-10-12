@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logo_ncrst.jpeg";
+import logo from "../../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="u-center">
           <img
             src={logo}
-            alt="fire department logo"
+            alt="science connect logo"
             style={{ height: "7rem" }}
           />
         </div>
