@@ -83,6 +83,9 @@ Booking Page
 
 Create Activity Page
 ![Create Activity Page](https://i.imgur.com/YxcfpPD.png)
+
+## Architecture Diagram
+![Architecture Diagram](https://i.imgur.com/NkKlYm1.png)
 ## How to Use
 
 To run Sci-Connect locally, follow these steps:
