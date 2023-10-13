@@ -1,11 +1,10 @@
 import logo from "../../assets/logo.png";
-import { useContext, Fragment, useEffect } from "react";
+import { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context";
 import { USER_TYPES, routesDictionary } from "../../configs";
-import { useIsMobile, useLogout } from "../../hooks";
+import { useIsMobile } from "../../hooks";
 import { Avatar } from "antd";
-import $ from "jquery";
 import DropDownLinks from "./DropDownLinks";
 import MobileHeader from "./MobileHeader";
 
@@ -14,23 +13,7 @@ const { home, create_activity, activities, login } = routesDictionary;
 const Header = () => {
   const { user } = useContext(UserContext);
   const { isMobile } = useIsMobile();
-
-  console.log(isMobile);
-  useEffect(() => {
-    console.log("Header component mounted!");
-    // jQuery code will be executed after the component is mounted
-    $(".has-sub").on("click", function (e) {
-      console.log("Dropdown menu clicked!");
-      // Get all dropdown menu toggles
-      $(".dropdown-menu")
-        .not($(this).children(".dropdown-menu"))
-        .removeClass("dropdown-shown"); // Hide all other dropdown menus
-      $(".has-sub").not($(this)).removeClass("active");
-      $(this).children(".dropdown-menu").toggleClass("dropdown-shown");
-      $(this).toggleClass("active");
-    });
-  }, []);
-
+  
   return isMobile ? (
     <MobileHeader />
   ) : (

@@ -2,14 +2,11 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import logo from "../../assets/logo.png";
-import { useContext, Fragment, useEffect } from "react";
+import { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context";
-import { USER_TYPES, routesDictionary } from "../../configs";
-import { useIsMobile, useLogout } from "../../hooks";
-import { Avatar } from "antd";
-import $ from "jquery";
-import DropDownLinks from "./DropDownLinks";
+import { routesDictionary } from "../../configs";
+import { useLogout } from "../../hooks";
 
 const { home, create_activity, activities, register,login } = routesDictionary;
 
