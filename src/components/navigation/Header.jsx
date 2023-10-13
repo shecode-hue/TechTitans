@@ -1,19 +1,39 @@
 import logo from "../../assets/logo.png";
-import { useContext, Fragment } from "react";
+import { useContext, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context";
 import { USER_TYPES, routesDictionary } from "../../configs";
-import { useLogout } from "../../hooks";
+import { useIsMobile, useLogout } from "../../hooks";
 import { Avatar } from "antd";
+import $ from "jquery";
+import DropDownLinks from "./DropDownLinks";
+import MobileHeader from "./MobileHeader";
 
-const { home, create_activity, activities, login, register } =
-  routesDictionary;
+const { home, create_activity, activities, login } = routesDictionary;
 
 const Header = () => {
   const { user } = useContext(UserContext);
-  const { logout: logUserOut } = useLogout();
+  const { isMobile } = useIsMobile();
 
-  return (
+  console.log(isMobile);
+  useEffect(() => {
+    console.log("Header component mounted!");
+    // jQuery code will be executed after the component is mounted
+    $(".has-sub").on("click", function (e) {
+      console.log("Dropdown menu clicked!");
+      // Get all dropdown menu toggles
+      $(".dropdown-menu")
+        .not($(this).children(".dropdown-menu"))
+        .removeClass("dropdown-shown"); // Hide all other dropdown menus
+      $(".has-sub").not($(this)).removeClass("active");
+      $(this).children(".dropdown-menu").toggleClass("dropdown-shown");
+      $(this).toggleClass("active");
+    });
+  }, []);
+
+  return isMobile ? (
+    <MobileHeader />
+  ) : (
     <div className="header header-fixed u-unselectable header-animated ">
       <div className="header-brand">
         <div className="nav-item no-hover">
@@ -23,11 +43,6 @@ const Header = () => {
               SCI_CONNECT
             </p>
           </Link>
-        </div>
-        <div className="nav-item nav-btn" id="header-btn">
-          <span></span>
-          <span></span>
-          <span></span>
         </div>
       </div>
       <div className="header-nav" id="header-menu">
@@ -70,40 +85,7 @@ const Header = () => {
             ""
           )}
 
-          <div className="nav-item has-sub toggle-hover" id="dropdown">
-            {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a className="nav-dropdown-link">
-              {user ? "Logout" : "Login/Register"}
-            </a>
-            <ul className="dropdown-menu dropdown-animated" role="menu">
-              {user ? (
-                ""
-              ) : (
-                <Fragment>
-                  {/*eslint-disable-next-line jsx-a11y/aria-role */}
-                  <li role="menu-item">
-                    <Link to={login} className={` text-black`}>
-                      Login
-                    </Link>
-                  </li>
-                  {/*eslint-disable-next-line jsx-a11y/aria-role */}
-                  <li role="menu-item">
-                    <Link to={register} className={` text-black`}>
-                      Register
-                    </Link>
-                  </li>
-                </Fragment>
-              )}
-              {user ? (
-                //eslint-disable-next-line jsx-a11y/aria-role
-                <li role="menu-item" onClick={() => logUserOut()}>
-                  <Link to="#">Logout</Link>
-                </li>
-              ) : (
-                ""
-              )}
-            </ul>
-          </div>
+          <DropDownLinks />
         </div>
       </div>
     </div>

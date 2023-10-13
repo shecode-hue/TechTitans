@@ -4,6 +4,7 @@ import { NoDATA } from "../components/misc";
 import routesDictionary from "../configs/routes-dictionary";
 import { useFetchActivities } from "../hooks";
 import { LoadingPage } from "../helpers/";
+import { EP_BUTTON } from "../components";
 
 const { book_activity } = routesDictionary;
 
@@ -31,8 +32,8 @@ export const ActivitiesPage = () => {
         className="container d-flex"
         style={{
           minHeight: "53.6vh",
-          width: "100%", 
-          flexWrap: "wrap", 
+          width: "100%",
+          flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
           gap: "1rem",
@@ -42,12 +43,7 @@ export const ActivitiesPage = () => {
         {activities &&
           activities.map((activity, index) => {
             return (
-              <div
-                key={index}
-                className="card"
-                style={{ width: "350px" }}
-                onClick={() => navigate(book_activity, { state: { activity } })}
-              >
+              <div key={index} className="card" style={{ width: "350px" }}>
                 <div className="card__container" style={{ display: "flex" }}>
                   <div
                     className="card__image"
@@ -75,6 +71,14 @@ export const ActivitiesPage = () => {
                     <span>{activity.descriptionOfActivity}</span>
                   </div>
                 </div>
+                <EP_BUTTON
+                  style={{ width: "100%", marginTop: "1rem", marginBottom: 0 }}
+                  text={"Book Now"}
+                  removeMargin={true}
+                  onClick={() =>
+                    navigate(book_activity, { state: { activity } })
+                  }
+                />
               </div>
             );
           })}

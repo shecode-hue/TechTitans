@@ -16,12 +16,14 @@ import { createActivityFormModel } from "../form-models";
 import { routesDictionary } from "../configs/routes-dictionary";
 import { activityCategories, targetAudience } from "../configs";
 import { openNotification } from "../helpers/components/toast-notification";
+import { useIsMobile } from "../hooks";
 
 const { REACT_APP_API_URL_PROD, REACT_APP_API_URL_DEV, NODE_ENV } = process.env;
 const { activities } = routesDictionary;
 
 export const CreateActivityForm = () => {
   const navigate = useNavigate();
+  const {isMobile} = useIsMobile();
 
   function NotifySuccess() {
     openNotification("Success", "Activity Created!!!");
@@ -51,7 +53,7 @@ export const CreateActivityForm = () => {
           <div
             className="frame bg-white"
             style={{
-              width: "80%",
+              width: isMobile ?"60vh" : "88vh",
             }}
           >
             <div className="formHeader">
@@ -97,12 +99,8 @@ export const CreateActivityForm = () => {
                   errors,
                   isSubmitting,
                 }) => {
-                  const {
-                    name,
-                    email,
-                    institution,
-                    designation,
-                  } = values.personOfferingActivity;
+                  const { name, email, institution, designation } =
+                    values.personOfferingActivity;
                   return (
                     <Form>
                       <div
